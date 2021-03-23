@@ -1,0 +1,47 @@
+<launch>
+    <!-- Arguments -->
+    <arg name = "use_rviz" default = "true"/>
+    <arg name="circle" default = "true" />
+    <arg name="robot" default="1" />
+    
+    <!--Teleop node -->
+    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch" if="$(eval arg('circle') == false)" />
+    
+    <!--load circle params -->
+    <rosparam command="load" file="$(find nuturtle_robot)/config/circle_params.yaml" />
+    <!--circle node -->
+    <node name="follow_circle_node" pkg="nuturtle_robot" type="follow_circle_node" output="screen" if="$(arg circle)" />
+    
+    <!--run nodes on turtlebot-->
+    <include file = "$(find nuturtle_robot)/launch/basic_remote.launch" >
+        <arg name="robot" value="$(arg robot)" />
+    </include>
+
+    <!--odom node -->
+    <node name="odometer_node" pkg="rigid2d" type="odometer_node" />
+
+    <!--turtle_interface node-->
+    <node name="turtle_interface_node" pkg="nuturtle_robot" type="turtle_interface_node" />
+
+    
+    <!-- nuturtle description -->
+    <!-- Load parameters to server -->
+    <rosparam command="load" file="$(find rigid2d)/config/diffDrive_params.yaml" />
+    <rosparam command = "load" file = "$(find nuturtle_description)/config/diff_params.yaml" />
+    
+    <!-- Robot description -->
+    <param name = "robot_description" command = "xacro $(find nuturtle_description)/urdf/turtlebot3_burger.urdf.xacro" />
+    
+    <!-- Node -->
+    <node name = "robot_state_publisher" pkg = "robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+    <node name = "joint_state_publisher" pkg = "joint_state_publisher" type= "joint_state_publisher" >
+        <param name="use_gui" value="true"/>
+        <param name="rate" value="50"/>
+    </node>
+
+    <!-- Rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args = "-d $(find nuturtle_robot)/config/odom_telep.rviz" if = "$(arg use_rviz)" />
+
+</launch>

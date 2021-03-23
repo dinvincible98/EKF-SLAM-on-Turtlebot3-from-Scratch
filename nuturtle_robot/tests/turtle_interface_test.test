@@ -1,0 +1,14 @@
+<launch>
+    <!-- turtle_interface node -->
+    <node name="turtle_interface_node" pkg="nuturtle_robot" type="turtle_interface_node" output="screen" />
+
+    <!-- turtlebot3 parameters-->
+    <rosparam command="load" file="$(find nuturtle_description)/config/diff_params.yaml" />
+    
+    <!-- joint params-->
+    <rosparam command="load" file="$(find rigid2d)/config/diffDrive_params.yaml" />
+
+    <!-- turtle_interface_test_node -->
+    <test test-name="turtle_interface_test" pkg="nuturtle_robot" type="turtle_interface_test" />
+
+</launch>

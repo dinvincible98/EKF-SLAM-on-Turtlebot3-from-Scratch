@@ -1,0 +1,27 @@
+<launch>
+    <!-- Argument-->
+    <arg name="robot" default="1" doc="specify the address for the machine tage" />
+
+    <!-- run on local machine -->
+    <group if="$(eval arg ('robot') == 1)">
+        <machine name="turtlebot1" 
+        address="turtlebot1.local"
+        env-loader="/home/ubuntu/loader.sh" user="ubuntu" >
+        </machine>
+    </group>
+
+    <!-- serial communication and lidar -->
+    <group if="$(eval arg('robot') != -1)">
+        <node machine="turtlebot1" name="serial_node" pkg="rosserial_python" type="serial_node.py">
+            <param name="port" value="/dev/ttyACM0" />
+            <param name="baud" value="115200" />
+        </node>
+
+        <node machine="turtlebot1" name="hlds_laser_publisher" pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" >
+            <param name="port" value="/dev/ttyUSB0"/>
+            <param name="frame_id" value="base_scan"/>
+        </node>
+    </group>
+
+
+</launch>

@@ -1,0 +1,9 @@
+repositories:
+  src/ME495_navigation:
+    type: git
+    url: https://github.com/ME495-Navigation/assignment-dinvincible98.git
+    version: master
+  src/nuturtlebot:
+    type: git
+    url: https://github.com/ME495-Navigation/nuturtlebot.git
+    version: master

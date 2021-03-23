@@ -1,0 +1,18 @@
+<launch>
+    <!-- Arguments -->
+    <arg name = "use_rviz" default = "true"/>
+    <!-- Load parameters to server -->
+    <rosparam command = "load" file = '$(find nuturtle_description)/config/diff_params.yaml' />
+    <!-- Robot description -->
+    <param name = "robot_description" command = "xacro $(find nuturtle_description)/urdf/turtlebot3_burger.urdf.xacro" />
+    <!-- Node -->
+    <node name = "robot_state_publisher" pkg = "robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+    <node name = "joint_state_publisher" pkg = "joint_state_publisher" type= "joint_state_publisher" >
+        <param name="use_gui" value="true"/>
+        <param name="rate" value="50"/>
+    </node>
+    <!-- Rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args = "-d $(find nuturtle_description)/rviz/burger.rviz" if = "$(arg use_rviz)" />
+</launch>

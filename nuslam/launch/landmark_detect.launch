@@ -1,0 +1,18 @@
+<launch>
+    <arg name="simulate" default="true" />
+    
+    <!-- Simulator -->
+    <include file="$(find nuslam)/launch/simulator.launch" if="$(arg simulate)" />
+
+    <!-- Turtlebot3 -->
+    <include file="$(find nuturtle_robot)/launch/odom_teleop.launch" if="$(eval arg('simulate') == false)" />
+    
+    <!--Teleop node -->
+    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch" />
+    
+    
+    <!-- landmark node-->
+    <node name="landmarks_node" pkg="nuslam" type="landmarks_node" />
+    <node name="display_node" pkg="nuslam" type="display_node" />
+
+</launch>

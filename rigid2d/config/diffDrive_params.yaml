@@ -1,0 +1,11 @@
+# params for odometery node
+# map frame id
+map_frame_id: "map" 
+# odom frame id
+odom_frame_id: "odom"
+# body frame id
+body_frame_id: "base_footprint"
+# left wheel joint name
+left_wheel_joint: "wheel_left_joint"
+# right wheel joint name
+right_wheel_joint: "wheel_right_joint"

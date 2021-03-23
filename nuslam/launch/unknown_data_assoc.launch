@@ -1,0 +1,19 @@
+<launch>
+    <!-- Argument -->
+    <arg name = "robot" default="1" doc="localhost" />
+
+    <!-- Simulator -->
+    <include file = "$(find nuslam)/launch/landmark_detect.launch" if="$(eval arg('robot') == 1)"/>
+    
+    <!-- Turtlebot3 -->
+    <include file="$(find nuslam)/launch/real.launch" if="$(eval arg('robot') == 0)" />
+    
+    <!--unknown slam-->
+    <rosparam command="load" file="$(find nuslam)/config/unknown.yaml" />  
+    
+    <!-- slam node -->
+    <node name="slam_node" pkg="nuslam" type="slam_node" />
+
+
+   
+</launch>

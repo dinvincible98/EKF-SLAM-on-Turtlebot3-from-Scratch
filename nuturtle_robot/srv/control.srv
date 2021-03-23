@@ -1,0 +1,6 @@
+# set direction of the rotation
+# direction is either clockwise(0) or counter-clockwise(1), other number is stop
+# set_direction is true when direction is set
+int8 direction
+---
+bool set_direction

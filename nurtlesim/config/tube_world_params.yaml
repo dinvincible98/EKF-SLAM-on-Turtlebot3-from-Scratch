@@ -1,0 +1,43 @@
+# Parameters for turtle simulator
+# x coordinate
+x: [-1.0, 1.0, 0.0, 0.0, 1.0, 1.0, -1.0, -1.0, 0.4, -0.4, 0.4, -0.4]
+# x: [1.0,-1.0,1.0,0.0,-1.0,-1.0,0.0,1.0]
+# x: [0.0,1.0,-1.0,1.0]
+# x: [1.0,1.0,-1.0,0.0,0.3]
+# y coordinate
+y: [0.0, 0.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0, -0.4, 0.4, 0.4, -0.4]
+# y: [1.0,1.0,0.0,1.0,0.0,-1.0,-1.0,-1.0]
+# y: [-1.0,0.0,0.0,1.0]
+# y: [0.0,1.0,1.0,1.0,0.0]
+# ids
+id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] 
+# radius
+r: 0.0762
+# max sensed distance
+max_range: 0.7
+# slip max
+slip_max: 0.1
+#slip min
+slip_min: -0.1
+# tube var
+tube_var: 0.001
+
+#SLAM noise
+# sensor noise R
+sensor_noise: [0.001,0.001]
+# Motion noise Q
+motion_noise: [0.00000001,0.00000001,0.00000001]
+# motion_noise: [0.0,0.0,0.0]
+#Laser properties
+# laserscan range
+Min: 0.12
+Max: 3.5
+# resolution
+resolution: 0.015
+# Angle increment and number of samples
+angle_increment: 0.01744
+samples: 360
+# noise level
+noise: 0.01
+# wall size
+wall_size: 1.75

@@ -1,0 +1,17 @@
+<launch>
+    <!-- Turtlebot3 -->
+    <include file="$(find nuturtle_robot)/launch/odom_teleop.launch" />
+    
+    <!-- Load parameters to server -->
+    <rosparam command = "load" file = '$(find nuturtle_description)/config/diff_params.yaml' />
+    <!-- Load parameters to the server -->
+    <rosparam command="load" file="$(find rigid2d)/config/diffDrive_params.yaml" />
+    <rosparam command="load" file="$(find nurtlesim)/config/tube_world_params.yaml" />
+
+    <!--Teleop node -->
+    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch" />
+    
+    <!-- landmark node-->
+    <node name="landmarks_node" pkg="nuslam" type="landmarks_node" />
+    <node name="display_node" pkg="nuslam" type="display_node" />
+</launch>

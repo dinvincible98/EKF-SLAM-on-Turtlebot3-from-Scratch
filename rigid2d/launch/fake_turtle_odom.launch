@@ -1,0 +1,27 @@
+<launch>
+    <!-- nuturtle description -->
+    <!-- Arguments -->
+    <arg name = "use_rviz" default = "true"/>
+
+    <!-- Load parameters to server -->
+    <rosparam command = "load" file = '$(find nuturtle_description)/config/diff_params.yaml' />
+    <!-- Robot description -->
+    <param name = "robot_description" command = "xacro $(find nuturtle_description)/urdf/turtlebot3_burger.urdf.xacro" />
+    <!-- Node -->
+    <node name = "robot_state_publisher" pkg = "robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+    
+    <!-- Rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args = "-d $(find rigid2d)/rviz/fake_turtle.rviz" if = "$(arg use_rviz)" />
+
+    <!-- Load parameters to the server -->
+    <rosparam command="load" file="$(find rigid2d)/config/diffDrive_params.yaml" />
+    
+    <!-- Launch node -->
+    <node name="fake_turtle_node" pkg="rigid2d" type="fake_turtle_node" />
+    <node name="odometer_node" pkg="rigid2d" type="odometer_node" />
+    <!--Teleop node -->
+    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch" />
+    
+</launch>
