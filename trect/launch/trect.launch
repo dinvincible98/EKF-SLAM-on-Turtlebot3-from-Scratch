@@ -1,0 +1,8 @@
+<launch>
+    <!-- turtlesim-->
+    <node name = "turtle1" pkg = "turtlesim" type = "turtlesim_node" />
+    <!-- load parameters -->
+    <rosparam command = "load" file = "$(find trect)/config/turtle_params.yaml" />
+    <!-- turtle_rect_node-->
+    <node name = "turtle_rect" pkg = "trect" type = "turtle_rect" output= "screen" />
+</launch>

@@ -1,0 +1,14 @@
+# x coordinate of the starting point
+x: 2
+# y coordinate of the starting point
+y: 3
+# width of the rectangle
+width: 4
+# height of the rectangle
+height: 5
+# max translational velocity
+max_xdot: 2.0
+# max angular velocity
+max_wdot: 1.0
+# publishing frequency
+frequency: 100
